@@ -11,11 +11,6 @@ class Todo {
     this.done = false;
   }
 
-  toString() {
-    let marker = this.isDone() ? Todo.DONE_MARKER : Todo.UNDONE_MARKER;
-    return `[${marker}] ${this.title}`;
-  }
-
   markDone() {
     this.done = true;
   }
@@ -23,13 +18,14 @@ class Todo {
   markUndone() {
     this.done = false;
   }
-
+ 
   isDone() {
     return this.done;
   }
-
-  getTitle() {
-    return this.title;
+   
+  toString() {
+    let marker = this.isDone() ? Todo.DONE_MARKER : Todo.UNDONE_MARKER;
+    return `[${marker}] ${this.title}`;
   }
 }
 // =======================================================================================
@@ -137,12 +133,6 @@ list.add(todo6)
 todo1.markDone();
 todo5.markDone();
 
-let doneTodos = list.filter(todo => todo.isDone());
-console.log(doneTodos);
-
-
-console.log(list.filter(todo => todo.isDone()).first());
-// => Todo { title: 'Buy milk', done: true }
 
 
 
