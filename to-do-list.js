@@ -18,14 +18,18 @@ class Todo {
   markUndone() {
     this.done = false;
   }
- 
+
   isDone() {
     return this.done;
   }
-   
+
   toString() {
     let marker = this.isDone() ? Todo.DONE_MARKER : Todo.UNDONE_MARKER;
     return `[${marker}] ${this.title}`;
+  }
+
+  getTitle() {
+    return this.title;
   }
 }
 // =======================================================================================
@@ -107,11 +111,45 @@ class TodoList {
 
   filter(callback) {
     let filteredList = new TodoList(this.title);
+
     this.forEach(todo => {
       if (callback(todo)) filteredList.add(todo);
     });
 
     return filteredList;
+  }
+
+  findByTitle(title) {
+    title = title.toLowerCase();
+    return this.filter(todo => todo.getTitle().toLowerCase() === title).first();
+  }
+
+  allDone() {
+    return this.filter(todo => todo.isDone());    
+  }
+
+  allNotDone() {
+    return this.filter(todo => !todo.isDone());
+  }
+
+  markDone(title) {
+    this.forEach(todo => {
+      if (todo.title === title) {
+        todo.markDone();
+      }
+    });
+  }
+
+  markAllDone() {
+    this.forEach(todo => todo.markDone());
+  }
+
+  markAllUndone() {
+    this.forEach(todo => todo.markUndone());
+  }
+
+  toArray() {
+    return this.todos.slice();
   }
 }
 
@@ -130,10 +168,9 @@ list.add(todo3)
 list.add(todo4)
 list.add(todo5)
 list.add(todo6)
-todo1.markDone();
-todo5.markDone();
-
-
+list.markDoneAt(0);
+list.markDoneAt(1);
+list.markDoneAt(4);
 
 
 
