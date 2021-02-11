@@ -68,8 +68,9 @@ class TodoList {
   }
 
   toString() {
-    console.log(`---- ${this.title} ----`);
-    this.todos.forEach(todo => console.log(todo.toString()));
+    let title = `---- ${this.title} ----`;
+    let list = this.todos.map(todo => todo.toString()).join("\n");
+    return `${title}\n${list}`;
   }
 
   forEach(callback) {
@@ -121,24 +122,12 @@ class TodoList {
 }
 
 
-let todo1 = new Todo("Buy milk");
-let todo2 = new Todo("Clean room");
-let todo3 = new Todo("Go to the gym");
-let todo4 = new Todo("Go shopping");
-let todo5 = new Todo("Feed the cats");
-let todo6 = new Todo("Study for Launch School");
-let list = new TodoList("Today's Todos");
-
-list.add(todo1)
-list.add(todo2)
-list.add(todo3)
-list.add(todo4)
-list.add(todo5)
-list.add(todo6)
-list.markDoneAt(0);
-list.markDoneAt(1);
-list.markDoneAt(4);
+let list = new TodoList("home items");
+list.add(new Todo("Wash car"));
 list.toString();
+module.exports = TodoList;
+
+
 
 
 
